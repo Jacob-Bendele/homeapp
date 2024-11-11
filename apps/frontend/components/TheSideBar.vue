@@ -23,13 +23,21 @@
   }>()
 
   const props = defineProps<{
-    navigation: NavItem[],
+    navConfig: NavItem[],
     open: boolean
   }>()
 
-  const updateOpenState = (state:boolean) => {
+  function updateOpenState (state:boolean) {
     emit('update:open', state);
-  };
+  }
+
+  function updateCurrentNav(item: NavItem) {
+    navigation.value.forEach((navItem) => {navItem.current = false})
+    item.current = true
+    console.log(item)
+  }
+
+  const navigation = ref(props.navConfig)
 
 </script>
 
@@ -60,10 +68,10 @@
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li v-for="item in navigation" :key="item.name">
-                      <a v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700']">
+                      <NuxtLink @click="updateCurrentNav(item)" v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700']">
                         <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
                         {{ item.name }}
-                      </a>
+                      </NuxtLink>
                       <Disclosure as="div" v-else v-slot="{ open }">
                         <DisclosureButton :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm font-semibold leading-6 text-gray-700']">
                           <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
@@ -74,7 +82,7 @@
                           <li v-for="subItem in item.children" :key="subItem.name">
                             <!-- 44px -->
                             <DisclosureButton as="template" :class="[subItem.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'block rounded-md py-2 pl-9 pr-2 text-sm leading-6 text-gray-700']">
-                              <NuxtLink :to="subItem.href">
+                              <NuxtLink @click="updateCurrentNav(item)" :to="subItem.href">
                                 {{ subItem.name }}  
                               </NuxtLink>
                             </DisclosureButton>
@@ -107,10 +115,10 @@
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li v-for="item in navigation" :key="item.name">
-              <a v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700']">
+              <NuxtLink  @click="updateCurrentNav(item)" v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700']">
                 <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
                 {{ item.name }}
-              </a>
+              </NuxtLink>
               <Disclosure as="div" v-else v-slot="{ open }">
                 <DisclosureButton :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm font-semibold leading-6 text-gray-700']">
                   <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
@@ -121,7 +129,7 @@
                   <li v-for="subItem in item.children" :key="subItem.name">
                     <!-- 44px -->
                     <DisclosureButton as="template" :href="subItem.href" :class="[subItem.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'block rounded-md py-2 pl-9 pr-2 text-sm leading-6 text-gray-700']">
-                      <NuxtLink :to="subItem.href">
+                      <NuxtLink @click="updateCurrentNav(item)" :to="subItem.href">
                         {{ subItem.name }}
                       </NuxtLink>
                     </DisclosureButton>

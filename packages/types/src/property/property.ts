@@ -1,5 +1,5 @@
 import type { ImageInfo } from "./imageInfo";
-import type { Money } from "./money"
+import type { Money } from "../payment/money"
 
 
 export interface Property {
@@ -43,11 +43,21 @@ export interface PropertySnapshot {
   }
 
 export interface GeneralizedAddress {
-    streetAddress?: string; // Full street address
-    city?: string;          // City name
-    state?: string;         // State or region
-    postalCode?: string;    // Postal or ZIP code
-    country?: string;       // Country name
+    streetAddress1: string; // Full street address
+    streetAddress2?: string; // Full street address
+    city: string;
+    postalCode: string;
+    country: string;
+    state?: string;
+    province?: string;
+    region?: string;
+    county?: string;
+    district?: string;
+    buildingName?: string;
+    buildingNumber?: string;
+    floor?: string;
+    apartment?: string;
+    type?: 'residential' | 'business' | 'poBox';
     additionalInfo?: string; // Any extra information (e.g., apartment number)
 }
 
