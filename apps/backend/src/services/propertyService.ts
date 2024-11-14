@@ -1,11 +1,13 @@
-import { PropertyRepository, Property } from "@monorepo/types"
+import { Property } from '@monorepo/types/property'
+import { Repository } from '@monorepo/types/common'
+
 export default class PropertyService {
-    constructor(private propertyRepository: PropertyRepository) {
+    constructor(private propertyRepository: Repository<Property>) {
       this.propertyRepository = propertyRepository
     }
   
     async getAllpropertys() {
-      return this.propertyRepository.getProperties()
+      return this.propertyRepository.getAll()
     }
   
     async createproperty(propertyData: Property) {
