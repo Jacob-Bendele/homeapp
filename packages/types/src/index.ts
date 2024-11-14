@@ -1,2 +1,2 @@
 export * from './listViewItem';
-export * from './navItem';
+export * from './navItem'
