@@ -10,15 +10,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "",
     "build": "tsc -p tsconfig.json",
+    "copy-json": "mkdir -p ./dist/test/resources/mocks/ && cp -r ./src/test/resources/mocks/* ./dist/test/resources/mocks/",
     "start": "NODE_ENV=production node ./dist/server.js",
-    "dev": "NODE_ENV=development node ./dist/server.js" 
+    "dev": "NODE_ENV=development node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@monorepo/types": "workspace:^",
     "fastify": "^5.1.0",
-    "@monorepo/types": "workspace:^"
+    "fastify-plugin": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",

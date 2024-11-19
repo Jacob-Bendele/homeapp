@@ -6,11 +6,11 @@ export default class PropertyService {
       this.propertyRepository = propertyRepository
     }
   
-    async getAllpropertys() {
+    async getAllProperites() {
       return this.propertyRepository.getAll()
     }
   
-    async createproperty(propertyData: Property) {
+    async createProperty(propertyData: Property) {
       // Add business logic here
       return this.propertyRepository.create(propertyData)
     }
