@@ -26,7 +26,8 @@ export default class MockPropertyRepository implements Repository<Property> {
     }
 
     async getAll(): Promise<Property[]> {
-      return this.properties;
+      // return typeof this.properties === Property[] ? this.properties : throw Error("Properties is invlid and not of type Properties")
+      return this.properties
     }
 
     async update(Property: Property): Promise<Property> {

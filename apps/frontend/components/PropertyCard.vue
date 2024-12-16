@@ -17,7 +17,6 @@
       addressLines: [props.property.address.streetAddress1]
     }).join('\n')
   })
-
 </script>
 
 <template>
@@ -31,7 +30,7 @@
       <a href="#" class="focus:outline-none">
         <span class="absolute inset-0" aria-hidden="true" />
         <p class="text-md font-medium text-gray-900">{{ property.name }}</p>
-        <p class="text-sm font-medium text-gray-900">{{ formatAddress }}</p>
+        <p class="text-sm font-medium text-gray-900">{{ formattedAddress }}</p>
         <p class="truncate text-sm text-gray-500">{{ property.type }}</p>
         <Badge text="↑20%" color="green"></Badge>
       </a>

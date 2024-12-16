@@ -6,12 +6,12 @@ export default class DataLoader {
     }
     readJsonFromFile<T>(): T {
       try {
-        const data = fs.readFileSync(this.filePath, 'utf-8'); // Read file asynchronously
-        const parsedData: T = JSON.parse(data); // Parse JSON data
-        return parsedData; // Return parsed data of type T
+        const data = fs.readFileSync(this.filePath, 'utf-8'); 
+        const parsedData: T = JSON.parse(data); 
+        return parsedData; 
       } catch (error) {
         console.error("Error reading JSON from file:", error);
-        throw error; // Rethrow or handle error appropriately
+        throw error; 
       }
     }
 }
