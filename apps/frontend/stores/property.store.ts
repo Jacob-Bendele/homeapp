@@ -12,6 +12,10 @@ export const usePropertyStore = defineStore('property', () => {
     async function fetchProperties(){
         isLoading.value = true
         // TODO: make this path with path to avoid the trailing slash issues of this.
+        const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // Add an artificial delay (e.g., 1000ms or 1 second)
+        await delay(4000);
         const response: Property[] = await $fetch(`${runtimeConfig.public.apiBase}properties`)
         properties.value = response
         isLoading.value = false    
